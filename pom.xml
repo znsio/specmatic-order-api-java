@@ -12,7 +12,7 @@
         <kotlin.version>1.7.20</kotlin.version>
         <maven.compiler>1.8</maven.compiler>
         <specmatic.version>0.75.2</specmatic.version>
-        <spring.boot.version>2.7.5</spring.boot.version>
+        <spring.boot.version>3.1.2</spring.boot.version>
     </properties>
 
     <dependencies>
@@ -209,7 +209,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.4.RELEASE</version>
+                <version>3.1.2</version>
                 <configuration>
                     <fork>true</fork>
                     <mainClass>${start.class}</mainClass>
