@@ -1,8 +1,9 @@
 package com.store.controllers
 
 import com.store.exceptions.NotFoundException
-import com.store.exceptions.ValidationException
 import com.store.model.*
+import com.store.services.OrderService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -12,39 +13,43 @@ import javax.validation.Valid
 
 @RestController
 class Orders {
-    @PostMapping("/orders")
-    fun create(@Valid @RequestBody order: Order,  @AuthenticationPrincipal user: User): ResponseEntity<Id> {
-        DB.reserveProductInventory(order.productid, order.count)
-        DB.addOrder(order)
+    @Autowired
+    lateinit var orderService: OrderService
 
-        return ResponseEntity(Id(order.id), HttpStatus.OK)
+    @PostMapping("/orders")
+    fun create(@Valid @RequestBody order: Order, @AuthenticationPrincipal user: User): ResponseEntity<Id> {
+        val orderId = orderService.createOrder(order)
+        return ResponseEntity(orderId, HttpStatus.OK)
     }
 
     @GetMapping("/orders/{id}")
     fun get(@PathVariable("id") id: Int): Order {
         try {
-            return DB.getOrder(id)
+            return orderService.getOrder(id)
         } catch (e: NoSuchElementException) {
             throw NotFoundException(e.message!!)
         }
     }
 
     @DeleteMapping("/orders/{id}")
-    fun delete(@PathVariable("id") id: Int,  @AuthenticationPrincipal user: User): ResponseEntity<String> {
-        DB.deleteOrder(id)
+    fun delete(@PathVariable("id") id: Int, @AuthenticationPrincipal user: User): ResponseEntity<String> {
+        orderService.deleteOrder(id)
         return ResponseEntity(HttpStatus.OK)
     }
 
     @PostMapping("/orders/{id}")
-    fun update(@PathVariable("id") id: Int, @Valid @RequestBody order: Order, @AuthenticationPrincipal user: User): ResponseEntity<String> {
-        if(order.id == 0)
-            throw ValidationException("Product id cannot be null")
-
-        DB.updateOrder(order)
+    fun update(
+        @PathVariable("id") id: Int,
+        @Valid @RequestBody order: Order,
+        @AuthenticationPrincipal user: User
+    ): ResponseEntity<String> {
+        orderService.updateOrder(order)
         return ResponseEntity(HttpStatus.OK)
     }
 
     @GetMapping("/orders")
-    fun search(@RequestParam(name="status", required=false) status: String?,
-               @RequestParam(name="productid", required=false) productid: Int?): List<Order> = DB.findOrders(status, productid)
+    fun search(
+        @RequestParam(name = "status", required = false) status: String?,
+        @RequestParam(name = "productid", required = false) productid: Int?
+    ): List<Order> = orderService.findOrders(status, productid)
 }
