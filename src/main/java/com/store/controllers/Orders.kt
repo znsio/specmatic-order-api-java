@@ -47,7 +47,4 @@ class Orders {
     @GetMapping("/orders")
     fun search(@RequestParam(name="status", required=false) status: String?,
                @RequestParam(name="productid", required=false) productid: Int?): List<Order> = DB.findOrders(status, productid)
-
-    @GetMapping("/orderinvoices/{id}")
-    fun getInvoice(@PathVariable("id") id: Int) = "invoice"
 }
