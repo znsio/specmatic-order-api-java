@@ -5,6 +5,10 @@ object DB {
     private var ORDERS: MutableMap<Int, Order> = mutableMapOf(10 to Order(10, 2, "pending", 10), 20 to Order(10, 1, "pending", 20))
     private val USERS: Map<String, User> = mapOf("API-TOKEN-HARI" to User("Hari"))
 
+    fun userCount(): Int {
+        return USERS.values.count()
+    }
+
     fun resetDB() {
         PRODUCTS = mutableMapOf(10 to Product("XYZ Phone", "gadget", 10, 10), 20 to Product("Gemini", "dog", 10, 20))
         ORDERS = mutableMapOf(10 to Order(10, 2, "pending", 10), 20 to Order(10, 1, "pending", 20))
