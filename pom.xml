@@ -9,9 +9,9 @@
     <version>1.0</version>
 
     <properties>
-        <kotlin.version>1.7.20</kotlin.version>
+        <kotlin.version>1.9.10</kotlin.version>
         <maven.compiler>1.8</maven.compiler>
-        <specmatic.version>0.77.0</specmatic.version>
+        <specmatic.version>0.79.0</specmatic.version>
         <spring.boot.version>2.7.5</spring.boot.version>
     </properties>
 
@@ -83,8 +83,8 @@
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.0</version>
+            <artifactId>org.junit.jupiter</artifactId>
+            <version>5.5.2</version>
             <scope>test</scope>
         </dependency>
 
