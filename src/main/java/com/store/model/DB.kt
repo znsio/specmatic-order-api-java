@@ -30,6 +30,9 @@ object DB {
     fun deleteProduct(id: Int) { PRODUCTS.remove(id) }
 
     fun findProducts(name: String?, type: String?, status: String?): List<Product> {
+        if(type != null && type !in listOf("book", "food", "gadget", "other"))
+            throw UnrecognizedTypeException(type)
+
         return PRODUCTS.filter { (id, product) ->
             product.name == name || product.type == type || inventoryStatus(id) == status
         }.values.toList()
