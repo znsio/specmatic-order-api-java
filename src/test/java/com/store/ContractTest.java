@@ -13,9 +13,9 @@ public class ContractTest extends SpecmaticJUnitSupport {
     @BeforeAll
     public static void setUp() {
         System.setProperty("host", "localhost");
-        System.setProperty("port", "8080");
+        System.setProperty("port", "8090");
 
-        System.setProperty("endpointsAPI", "http://localhost:8080/actuator/mappings");
+        System.setProperty("endpointsAPI", "http://localhost:8090/actuator/mappings");
 
         System.setProperty("SPECMATIC_GENERATIVE_TESTS", "true");
 
