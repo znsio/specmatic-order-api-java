@@ -15,3 +15,10 @@ data class Product(
         val idGenerator: AtomicInteger = AtomicInteger()
     }
 }
+
+enum class ProductType {
+    book,
+    food,
+    gadget,
+    other
+}

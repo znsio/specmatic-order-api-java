@@ -29,6 +29,10 @@ open class Products {
         @Valid @RequestBody product: Product,
         @AuthenticationPrincipal user: User
     ): ResponseEntity<String> {
+        val productId = productService.addProduct(product.also {
+            if(product.type !in typesOfProducts)
+                throw ValidationException("type must be one of ${typesOfProducts.joinToString(", ")}")
+        })
         productService.updateProduct(product)
         return ResponseEntity(HttpStatus.OK)
     }

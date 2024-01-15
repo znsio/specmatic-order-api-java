@@ -49,7 +49,7 @@ class Orders {
 
     @GetMapping("/orders")
     fun search(
-        @RequestParam(name = "status", required = false) status: String?,
+        @RequestParam(name = "status", required = false) status: OrderStatus?,
         @RequestParam(name = "productid", required = false) productid: Int?
     ): List<Order> = orderService.findOrders(status, productid)
 }
