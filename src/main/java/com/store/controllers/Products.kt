@@ -1,6 +1,7 @@
 package com.store.controllers
 
 import com.store.exceptions.NotFoundException
+import com.store.exceptions.ValidationException
 import com.store.model.Id
 import com.store.model.Product
 import com.store.model.User
@@ -12,6 +13,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
+
+private val typesOfProducts = listOf("gadget", "book", "food", "other")
 
 @RestController
 open class Products {
@@ -26,6 +29,10 @@ open class Products {
         @Valid @RequestBody product: Product,
         @AuthenticationPrincipal user: User
     ): ResponseEntity<String> {
+        val productId = productService.addProduct(product.also {
+            if(product.type !in typesOfProducts)
+                throw ValidationException("type must be one of ${typesOfProducts.joinToString(", ")}")
+        })
         productService.updateProduct(product)
         return ResponseEntity(HttpStatus.OK)
     }
@@ -41,7 +48,10 @@ open class Products {
 
     @PostMapping("/products")
     fun create(@Valid @RequestBody newProduct: Product, @AuthenticationPrincipal user: User): ResponseEntity<Id> {
-        val productId = productService.addProduct(newProduct)
+        val productId = productService.addProduct(newProduct.also {
+            if(newProduct.type !in typesOfProducts)
+                throw ValidationException("type must be one of ${typesOfProducts.joinToString(", ")}")
+        })
         return ResponseEntity(productId, HttpStatus.OK)
     }
 

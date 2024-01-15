@@ -4,5 +4,6 @@ build/*
 lib/*
 *.iml
 *.idea
-.qontract/*
 .specmatic
+.vscode/*
+kafka-logs

@@ -13,8 +13,6 @@ public class ComponentTest {
     @BeforeAll
     public static void setUp() throws InterruptedException {
         DB.INSTANCE.resetDB();
-
-        Thread.sleep(1000);
         context = SpringApplication.run(Application.class);
     }
 

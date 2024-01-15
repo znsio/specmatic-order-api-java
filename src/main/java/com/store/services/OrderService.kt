@@ -4,6 +4,7 @@ import com.store.exceptions.ValidationException
 import com.store.model.DB
 import com.store.model.Id
 import com.store.model.Order
+import com.store.model.OrderStatus
 import org.springframework.stereotype.Service
 
 @Service
@@ -28,7 +29,7 @@ class OrderService {
         DB.updateOrder(order)
     }
 
-    fun findOrders(status: String?, productid: Int?): List<Order> {
+    fun findOrders(status: OrderStatus?, productid: Int?): List<Order> {
         return DB.findOrders(status, productid)
     }
 }

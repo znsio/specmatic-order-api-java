@@ -1,8 +1,13 @@
 package com.store.model
 
+import com.store.exceptions.UnrecognizedTypeException
+import javax.validation.ValidationException
+
 object DB {
-    private var PRODUCTS: MutableMap<Int, Product> = mutableMapOf(10 to Product("XYZ Phone", "gadget", 10, 10), 20 to Product("Gemini", "dog", 10, 20))
-    private var ORDERS: MutableMap<Int, Order> = mutableMapOf(10 to Order(10, 2, "pending", 10), 20 to Order(10, 1, "pending", 20))
+    private var PRODUCTS: MutableMap<Int, Product> =
+        mutableMapOf(10 to Product("XYZ Phone", "gadget", 10, 10), 20 to Product("Gemini", "dog", 10, 20))
+    private var ORDERS: MutableMap<Int, Order> =
+        mutableMapOf(10 to Order(10, 2, OrderStatus.pending, 10), 20 to Order(10, 1, OrderStatus.pending, 20))
     private val USERS: Map<String, User> = mapOf("API-TOKEN-SPEC" to User("Hari"))
 
     fun userCount(): Int {
@@ -11,7 +16,7 @@ object DB {
 
     fun resetDB() {
         PRODUCTS = mutableMapOf(10 to Product("XYZ Phone", "gadget", 10, 10), 20 to Product("Gemini", "dog", 10, 20))
-        ORDERS = mutableMapOf(10 to Order(10, 2, "pending", 10), 20 to Order(10, 1, "pending", 20))
+        ORDERS = mutableMapOf(10 to Order(10, 2, OrderStatus.pending, 10), 20 to Order(10, 1, OrderStatus.pending, 20))
     }
 
     fun addProduct(product: Product) {
@@ -27,9 +32,14 @@ object DB {
         }
     }
 
-    fun deleteProduct(id: Int) { PRODUCTS.remove(id) }
+    fun deleteProduct(id: Int) {
+        PRODUCTS.remove(id)
+    }
 
     fun findProducts(name: String?, type: String?, status: String?): List<Product> {
+        if (type != null && type !in listOf("book", "food", "gadget", "other"))
+            throw UnrecognizedTypeException(type)
+
         return PRODUCTS.filter { (id, product) ->
             product.name == name || product.type == type || inventoryStatus(id) == status
         }.values.toList()
@@ -52,7 +62,7 @@ object DB {
         ORDERS.remove(id)
     }
 
-    fun findOrders(status: String?, productId: Int?): List<Order> {
+    fun findOrders(status: OrderStatus?, productId: Int?): List<Order> {
         return ORDERS.filter { (_, order) ->
             order.status == status || order.productid == productId
         }.values.toList()
@@ -68,6 +78,8 @@ object DB {
     }
 
     fun reserveProductInventory(productId: Int, count: Int) {
+        if (productId !in PRODUCTS)
+            throw ValidationException("Product Id $productId does not exist")
         val updatedProduct = PRODUCTS.getValue(productId).let {
             it.copy(inventory = it.inventory - count)
         }
