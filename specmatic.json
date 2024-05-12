@@ -2,7 +2,7 @@
   "sources": [
     {
       "provider": "git",
-      "repository": "https://github.com/znsio/central-contract-repo-private.git",
+      "repository": "https://${CENTRAL_CONTRACT_REPO_ACCESS_TOKEN}@github.com/znsio/central-contract-repo-private.git",
       "test": [
         "in/specmatic/examples/store/api_order_v3.yaml"
       ]
