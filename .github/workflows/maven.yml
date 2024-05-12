@@ -28,6 +28,8 @@ jobs:
         java-version: ${{ matrix.java }}
     - name: Build with Maven
       working-directory: main
+      env:
+        PERSONAL_ACCESS_TOKEN: ${{ secrets.CENTRAL_CONTRACT_REPO_ACCESS_TOKEN }}
       run: mvn test package jacoco:report
     - name: Upload artifact
       uses: actions/upload-artifact@v3
