@@ -1,6 +1,3 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
 name: Java CI with Maven
 
 on:
@@ -28,6 +25,8 @@ jobs:
         java-version: ${{ matrix.java }}
     - name: Build with Maven
       working-directory: main
+      env:
+        CENTRAL_CONTRACT_REPO_PAT: ${{ secrets.CENTRAL_CONTRACT_REPO_ACCESS_TOKEN }}
       run: mvn test package jacoco:report
     - name: Upload artifact
       uses: actions/upload-artifact@v3
