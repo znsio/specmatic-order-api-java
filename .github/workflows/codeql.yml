@@ -39,6 +39,8 @@ jobs:
         distribution: 'adopt'
 
     - name: Build with Maven
+      env:
+        CENTRAL_CONTRACT_REPO_PAT: ${{ secrets.CENTRAL_CONTRACT_REPO_ACCESS_TOKEN }}
       run: mvn -B package --file pom.xml
 
     - name: Perform CodeQL Analysis
