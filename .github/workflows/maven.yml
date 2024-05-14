@@ -14,23 +14,39 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        java: [17]
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        java: [ 17 ]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v4
-      with:
-        path: main
-    - name: Set up JDK ${{ matrix.java }}
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'oracle'
-        java-version: ${{ matrix.java }}
-    - name: Build with Maven
-      working-directory: main
-      run: mvn test package jacoco:report
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: jacoco coverage report
-        path: /home/runner/work/specmatic-order-api/specmatic-order-api/main/target/site/jacoco
+      - uses: actions/checkout@v4
+        with:
+          path: main
+
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'oracle'
+          java-version: ${{ matrix.java }}
+
+      - name: Build with Maven
+        working-directory: main
+        run: mvn test package jacoco:report
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco coverage report
+          path: /home/runner/work/specmatic-order-api/specmatic-order-api/main/target/site/jacoco
+
+      - name: Install Specmatic Insights Github Build Reporter
+        run: npm install -g specmatic-insights-github-build-reporter
+
+      - name: Run Specmatic Insights Github Build Reporter
+        working-directory: .
+        run: |
+          npx specmatic-insights-github-build-reporter --specmatic-insights-host https://20d4-103-163-106-75.ngrok-free.app --specmatic-coverage ./build/reports/specmatic/coverage_report.json
+        env:
+          GITHUB_ORG_ID: ${{ secrets.SPECMATIC_INSIGHTS_ORG_ID }}
+          GITHUB_TOKEN: ${{ secrets.SPECMATIC_INSIGHTS_ACCESS_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
