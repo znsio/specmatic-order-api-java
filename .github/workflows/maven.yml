@@ -31,12 +31,6 @@ jobs:
       - name: Build with Maven
         working-directory: main
         run: mvn test package jacoco:report
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: jacoco coverage report
-          path: /home/runner/work/specmatic-order-api/specmatic-order-api/main/target/site/jacoco
-
       - name: Install Specmatic Insights Github Build Reporter
         run: npm install -g specmatic-insights-github-build-reporter
 
@@ -52,3 +46,9 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco coverage report
+          path: /home/runner/work/specmatic-order-api/specmatic-order-api/main/target/site/jacoco
