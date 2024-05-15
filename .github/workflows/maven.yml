@@ -35,9 +35,8 @@ jobs:
       - name: Run Specmatic Insights Github Build Reporter
         working-directory: .
         run: |
-          npx specmatic-insights-github-build-reporter --specmatic-insights-host $SPECMATIC_URL --specmatic-coverage ./build/reports/specmatic/coverage_report.json
+          npx specmatic-insights-github-build-reporter --specmatic-insights-host https://insights.specmatic.in --specmatic-coverage ./build/reports/specmatic/coverage_report.json
         env:
-          SPECMATIC_URL: ${{ secrets.SPECMATIC_URL }}
           GITHUB_ORG_ID: ${{ secrets.SPECMATIC_ORG_ID }}
           GITHUB_TOKEN: ${{ secrets.SPECMATIC_INSIGHTS_ACCESS_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
