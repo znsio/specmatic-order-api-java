@@ -33,7 +33,7 @@ jobs:
       - name: Run Specmatic Insights Github Build Reporter
         run: |
           docker run \
-            -v ${{ github.workspace }}:/app \
+            -v ${{ github.workspace }}:/workspace \
             -e SPECMATIC_ORG_ID=${{ secrets.SPECMATIC_ORG_ID }} \
             -e GITHUB_TOKEN=${{ secrets.SPECMATIC_INSIGHTS_ACCESS_TOKEN }} \
             -e GITHUB_REF=${{ github.ref }} \
@@ -43,7 +43,7 @@ jobs:
             -e GITHUB_REPOSITORY_OWNER=${{ github.repository_owner }} \
             -e GITHUB_REPOSITORY_ID=${{ github.repository_id }} \
             -e GITHUB_SERVER_URL=${{ github.server_url }} \
-            znsio/specmatic-insights-github-build-reporter:latest --specmatic-insights-host https://insights.specmatic.in --specmatic-reports-dir ./build/reports/specmatic
+            znsio/specmatic-insights-github-build-reporter:latest --specmatic-insights-host https://insights.specmatic.in --specmatic-reports-dir /workspace/build/reports/specmatic
 
       # - name: Run Specmatic Insights Github Build Reporter
       #   uses: znsio/specmatic-insights-build-reporter-github-action@v1.1.2
