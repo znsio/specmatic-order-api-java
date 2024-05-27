@@ -31,17 +31,31 @@ jobs:
         run: mvn test package jacoco:report
 
       - name: Run Specmatic Insights Github Build Reporter
-        uses: znsio/specmatic-insights-build-reporter-github-action@v1.1.2
-        env:
-          SPECMATIC_ORG_ID: ${{ secrets.SPECMATIC_ORG_ID }}
-          GITHUB_TOKEN: ${{ secrets.SPECMATIC_INSIGHTS_ACCESS_TOKEN }}
-          GITHUB_REF: ${{ github.ref }}
-          GITHUB_REF_NAME: ${{ github.ref_name }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
-          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-          GITHUB_REPOSITORY_ID: ${{ github.repository_id }}
-          GITHUB_SERVER_URL: ${{ github.server_url }}
+        run: |
+          docker run \
+            -e SPECMATIC_ORG_ID=${{ secrets.SPECMATIC_ORG_ID }} \
+            -e GITHUB_TOKEN=${{ secrets.SPECMATIC_INSIGHTS_ACCESS_TOKEN }} \
+            -e GITHUB_REF=${{ github.ref }} \
+            -e GITHUB_REF_NAME=${{ github.ref_name }} \
+            -e GITHUB_REPOSITORY=${{ github.repository }} \
+            -e GITHUB_RUN_ID=${{ github.run_id }} \
+            -e GITHUB_REPOSITORY_OWNER=${{ github.repository_owner }} \
+            -e GITHUB_REPOSITORY_ID=${{ github.repository_id }} \
+            -e GITHUB_SERVER_URL=${{ github.server_url }} \
+            znsio/specmatic-insights-github-build-reporter:latest --specmatic-insights-host https://insights.specmatic.in --specmatic-reports-dir ./build/reports/specmatic
+
+      # - name: Run Specmatic Insights Github Build Reporter
+      #   uses: znsio/specmatic-insights-build-reporter-github-action@v1.1.2
+      #   env:
+      #     SPECMATIC_ORG_ID: ${{ secrets.SPECMATIC_ORG_ID }}
+      #     GITHUB_TOKEN: ${{ secrets.SPECMATIC_INSIGHTS_ACCESS_TOKEN }}
+      #     GITHUB_REF: ${{ github.ref }}
+      #     GITHUB_REF_NAME: ${{ github.ref_name }}
+      #     GITHUB_REPOSITORY: ${{ github.repository }}
+      #     GITHUB_RUN_ID: ${{ github.run_id }}
+      #     GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+      #     GITHUB_REPOSITORY_ID: ${{ github.repository_id }}
+      #     GITHUB_SERVER_URL: ${{ github.server_url }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
