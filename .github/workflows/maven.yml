@@ -33,6 +33,7 @@ jobs:
       - name: Run Specmatic Insights Github Build Reporter
         run: |
           docker run \
+            -v ${{ github.workspace }}:/app \
             -e SPECMATIC_ORG_ID=${{ secrets.SPECMATIC_ORG_ID }} \
             -e GITHUB_TOKEN=${{ secrets.SPECMATIC_INSIGHTS_ACCESS_TOKEN }} \
             -e GITHUB_REF=${{ github.ref }} \
