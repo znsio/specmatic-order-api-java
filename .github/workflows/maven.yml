@@ -30,6 +30,16 @@ jobs:
       - name: Build with Maven
         run: mvn test package jacoco:report
 
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "GITHUB_CONTEXT = $GITHUB_CONTEXT"
+
+      - name: Dump env context
+        env:
+          ENV_CONTEXT: ${{ toJson(env) }}
+        run: echo "ENV = $ENV_CONTEXT"
+
       - name: Get Workflow Definition ID
         id: get_workflow_id
         env:
