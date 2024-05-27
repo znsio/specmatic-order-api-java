@@ -30,16 +30,6 @@ jobs:
       - name: Build with Maven
         run: mvn test package jacoco:report
 
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "GITHUB_CONTEXT = $GITHUB_CONTEXT"
-
-      - name: Dump env context
-        env:
-          ENV_CONTEXT: ${{ toJson(env) }}
-        run: echo "ENV = $ENV_CONTEXT"
-
       - name: Get Workflow Definition ID
         id: get_workflow_id
         env:
@@ -57,7 +47,7 @@ jobs:
         run: |
           REPO_NAME=$(echo "${{ github.repository }}" | sed "s/${{ github.repository_owner }}\///") 
           echo "Repo Name: $REPO_NAME"
-          echo "RepoName: ${{ github.event.respository.name }}"
+          echo "RepoName: ${{ github.event.repository.name }}"
           docker run \
             -v ${{ github.workspace }}:/workspace \
             znsio/specmatic-insights-github-build-reporter:latest \
@@ -68,7 +58,7 @@ jobs:
               --branch-name ${{ github.ref_name }} \
               --build-definition-id ${{ steps.get_workflow_id.outputs.workflow_id }} \
               --build-id ${{ github.run_id }} \
-              --repo-name ${{ github.event.respository.name }} \
+              --repo-name ${{ github.event.repository.name }} \
               --repo-id ${{ github.repository_id }} \
               --repo-url ${{ github.server_url }}/${{ github.repository }}
 
