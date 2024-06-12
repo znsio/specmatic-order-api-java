@@ -31,4 +31,9 @@ class ProductService {
     fun findProducts(name:String?, type:String?, status:String?): List<Product> {
         return DB.findProducts(name, type, status)
     }
+
+    fun getProductInventory(productId: Int): Int {
+        val product = DB.findProduct(productId)
+        return product.inventory
+    }
 }

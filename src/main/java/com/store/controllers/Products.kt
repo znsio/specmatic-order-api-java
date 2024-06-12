@@ -73,4 +73,13 @@ open class Products {
         val products = productService.findProducts(name, type, status)
         return ResponseEntity(products, HttpStatus.OK)
     }
+
+    @GetMapping("/products/{id}/inventory")
+    fun getProductInventory(@PathVariable("id") id: Int): Int {
+        try {
+            return productService.getProductInventory(id)
+        } catch (e: NoSuchElementException) {
+            throw NotFoundException(e.message!!)
+        }
+    }
 }
