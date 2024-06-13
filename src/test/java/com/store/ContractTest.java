@@ -1,13 +1,13 @@
 package com.store;
 
 import com.store.model.DB;
-import in.specmatic.test.SpecmaticJUnitSupport;
+import in.specmatic.test.SpecmaticContractTest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class ContractTest extends SpecmaticJUnitSupport {
+public class ContractTest implements SpecmaticContractTest {
     private static ConfigurableApplicationContext context;
 
     @BeforeAll
