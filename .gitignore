@@ -7,3 +7,4 @@ lib/*
 .specmatic
 .vscode/*
 kafka-logs
+.java-version
