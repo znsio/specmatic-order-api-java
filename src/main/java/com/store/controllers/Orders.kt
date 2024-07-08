@@ -3,13 +3,13 @@ package com.store.controllers
 import com.store.exceptions.NotFoundException
 import com.store.model.*
 import com.store.services.OrderService
+import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 import java.util.NoSuchElementException
-import javax.validation.Valid
 
 @RestController
 class Orders {
@@ -18,6 +18,7 @@ class Orders {
 
     @PostMapping("/orders")
     fun create(@Valid @RequestBody order: Order, @AuthenticationPrincipal user: User): ResponseEntity<Id> {
+        println(order.status.toString())
         val orderId = orderService.createOrder(order)
         return ResponseEntity(orderId, HttpStatus.OK)
     }
@@ -43,6 +44,7 @@ class Orders {
         @Valid @RequestBody order: Order,
         @AuthenticationPrincipal user: User
     ): ResponseEntity<String> {
+        println(order.status.toString())
         orderService.updateOrder(order)
         return ResponseEntity(HttpStatus.OK)
     }

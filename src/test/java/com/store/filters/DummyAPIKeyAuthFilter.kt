@@ -1,7 +1,7 @@
 package com.store.filters
 
 import com.store.model.User
-import javax.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
 class DummyAPIKeyAuthFilter(private val principalRequestHeader: String) :

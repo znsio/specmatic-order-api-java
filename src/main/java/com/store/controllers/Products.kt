@@ -6,13 +6,13 @@ import com.store.model.Id
 import com.store.model.Product
 import com.store.model.User
 import com.store.services.ProductService
+import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
-import javax.validation.Valid
 
 private val typesOfProducts = listOf("gadget", "book", "food", "other")
 

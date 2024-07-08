@@ -1,8 +1,8 @@
 package com.store.model
 
+import jakarta.validation.constraints.NotNull
+import jakarta.validation.constraints.Positive
 import java.util.concurrent.atomic.AtomicInteger
-import javax.validation.constraints.NotNull
-import javax.validation.constraints.Positive
 
 class Order(@field:Positive val productid: Int = 0, @field:Positive val count: Int = 0, @field:NotNull var status: OrderStatus = OrderStatus.pending, val id: Int = idGenerator.getAndIncrement()) {
     companion object {
