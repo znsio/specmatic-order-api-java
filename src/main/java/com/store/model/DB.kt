@@ -1,7 +1,7 @@
 package com.store.model
 
 import com.store.exceptions.UnrecognizedTypeException
-import javax.validation.ValidationException
+import jakarta.validation.ValidationException
 
 object DB {
     private var PRODUCTS: MutableMap<Int, Product> =
@@ -68,11 +68,6 @@ object DB {
         }.values.toList()
     }
 
-    fun cleanSlate() {
-        PRODUCTS.clear()
-        ORDERS.clear()
-    }
-
     fun updateOrder(updatedOrder: Order) {
         ORDERS[updatedOrder.id] = updatedOrder
     }
@@ -87,5 +82,4 @@ object DB {
         PRODUCTS[productId] = updatedProduct
     }
 
-    fun getUserForToken(token: String) = USERS[token]
 }
