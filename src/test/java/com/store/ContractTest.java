@@ -1,7 +1,7 @@
 package com.store;
 
 import com.store.model.DB;
-import in.specmatic.test.SpecmaticContractTest;
+import io.specmatic.test.SpecmaticContractTest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.SpringApplication;
