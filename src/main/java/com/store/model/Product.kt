@@ -9,7 +9,8 @@ data class Product(
     @field:NotNull @field:JsonDeserialize(using = StrictStringDeserializer::class) val name: String = "",
     @field:NotNull val type: String = "gadget",
     @field:NotNull @field:Positive val inventory: Int = 0,
-    val id: Int = idGenerator.getAndIncrement()
+    val id: Int = idGenerator.getAndIncrement(),
+    val newField: Int? = null
 ) {
     companion object {
         val idGenerator: AtomicInteger = AtomicInteger()
