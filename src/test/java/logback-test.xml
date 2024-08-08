@@ -7,14 +7,6 @@
         </encoder>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>target/karate.log</file>
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <logger name="com.intuit.karate" level="DEBUG"/>
     <logger name="demo" level="DEBUG"/>
     <logger name="mock" level="DEBUG"/>
 
