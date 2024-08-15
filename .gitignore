@@ -8,3 +8,4 @@ lib/*
 .vscode/*
 kafka-logs
 .java-version
+.images

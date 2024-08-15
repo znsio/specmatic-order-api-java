@@ -6,6 +6,8 @@ import jakarta.validation.ValidationException
 object DB {
     private var PRODUCTS: MutableMap<Int, Product> =
         mutableMapOf(10 to Product("XYZ Phone", "gadget", 10, 10), 20 to Product("Gemini", "dog", 10, 20))
+    private var PRODUCT_IMAGE: MutableMap<Int, String> =
+        mutableMapOf(10 to "https://example.com/image.jpg", 20 to "https://example.com/image.jpg")
     private var ORDERS: MutableMap<Int, Order> =
         mutableMapOf(10 to Order(10, 2, OrderStatus.pending, 10), 20 to Order(10, 1, OrderStatus.pending, 20))
     private val USERS: Map<String, User> = mapOf("API-TOKEN-SPEC" to User("Hari"))
@@ -82,4 +84,7 @@ object DB {
         PRODUCTS[productId] = updatedProduct
     }
 
+    fun updateProductImage(id: Int, imageFileName: String) {
+        PRODUCT_IMAGE[id] = imageFileName
+    }
 }

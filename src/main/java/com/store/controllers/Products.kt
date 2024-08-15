@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 
 private val typesOfProducts = listOf("gadget", "book", "food", "other")
 
@@ -72,5 +73,12 @@ open class Products {
             return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         val products = productService.findProducts(name, type, status)
         return ResponseEntity(products, HttpStatus.OK)
+    }
+
+    @PutMapping("/products/{id}/image", consumes = ["multipart/form-data"])
+    fun uploadImage(@PathVariable("id") id: Int, @RequestPart("image") image: MultipartFile): ResponseEntity<Map<String, Any>> {
+        productService.addImage(id, image.originalFilename, image.bytes)
+        val response = mapOf("message" to "Product image updated successfully", "productId" to id)
+        return ResponseEntity(response, HttpStatus.OK)
     }
 }

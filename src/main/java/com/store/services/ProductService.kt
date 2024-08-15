@@ -1,6 +1,7 @@
 package com.store.services
 
 import com.store.exceptions.ValidationException
+import com.store.filestorage.LocalFileSystem
 import com.store.model.DB
 import com.store.model.Id
 import com.store.model.Product
@@ -30,5 +31,10 @@ class ProductService {
 
     fun findProducts(name:String?, type:String?, status:String?): List<Product> {
         return DB.findProducts(name, type, status)
+    }
+
+    fun addImage(id: Int, imageFileName: String, bytes: ByteArray) {
+        val canonicalImageFilePath = LocalFileSystem.saveImage(imageFileName, bytes)
+        DB.updateProductImage(id, canonicalImageFilePath)
     }
 }
