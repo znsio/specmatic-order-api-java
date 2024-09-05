@@ -15,3 +15,10 @@ The architecture diagram was created using the amazing free online SVG editor at
 1. Build the project using : `./mvnw clean install`
 2. For unix platform, run the application using : `./mvnw spring-boot:run`
 3. For windows platform, run the application using : `mvnw.cmd spring-boot:run`
+
+### How to test the application?
+1. Using maven: `mvn clean test`
+2. Using docker:
+    - Start Docker Desktop
+    - Run the application `./mvnw spring-boot:run`
+    - Run the tests `docker run --network host -v "$PWD/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$PWD/build/reports/specmatic:/usr/src/app/build/reports/specmatic"  znsio/specmatic test --port=8090 --host=host.docker.internal`
