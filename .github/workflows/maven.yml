@@ -58,3 +58,9 @@ jobs:
         with:
           name: jacoco coverage report
           path: /home/runner/work/specmatic-order-api/specmatic-order-api/target/site/jacoco
+
+      - name: Upload HTML Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-${{ matrix.java }}-html-report
+          path: build/reports/specmatic/html
