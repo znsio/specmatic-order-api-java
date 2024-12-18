@@ -11,8 +11,8 @@
     <properties>
         <kotlin.version>1.9.24</kotlin.version>
         <maven.compiler>17</maven.compiler>
-        <specmatic.version>2.0.45</specmatic.version>
-        <spring.boot.version>3.3.1</spring.boot.version>
+        <specmatic.version>2.0.48</specmatic.version>
+        <spring.boot.version>3.4.0</spring.boot.version>
     </properties>
 
     <dependencies>
