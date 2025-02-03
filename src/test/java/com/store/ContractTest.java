@@ -17,7 +17,7 @@ public class ContractTest implements SpecmaticContractTest {
         System.setProperty("endpointsAPI", "http://localhost:8090/actuator/mappings");
         System.setProperty("SPECMATIC_GENERATIVE_TESTS", "true");
         System.setProperty("SPECMATIC_TEST_PARALLELISM", "auto");
-        System.setProperty("filter", "METHOD!='/internal/metrics'")
+        System.setProperty("filter", "METHOD!='/internal/metrics'");
         DB.INSTANCE.resetDB();
 
         context = SpringApplication.run(Application.class);
