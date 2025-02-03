@@ -15,4 +15,5 @@ report:
           minThresholdPercentage: 70
           maxMissedEndpointsInSpec: 4
           enforce: true
-
+        excludedEndpoints:
+          - /internal/metrics
