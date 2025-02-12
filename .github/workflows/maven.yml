@@ -30,18 +30,6 @@ jobs:
       - name: Build with Maven
         run: mvn test package jacoco:report
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: jacoco coverage report
-          path: /home/runner/work/specmatic-order-api/specmatic-order-api/target/site/jacoco
-
-      - name: Upload HTML Test Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.os }}-${{ matrix.java }}-html-report
-          path: build/reports/specmatic
-
       - name: Run Specmatic Insights Github Build Reporter
         env:
           GITHUB_TOKEN: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
@@ -64,3 +52,15 @@ jobs:
               --repo-name ${{ github.event.repository.name }} \
               --repo-id ${{ github.repository_id }} \
               --repo-url ${{ github.event.repository.html_url }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco coverage report
+          path: /home/runner/work/specmatic-order-api/specmatic-order-api/target/site/jacoco
+
+      - name: Upload HTML Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-${{ matrix.java }}-html-report
+          path: build/reports/specmatic/html
