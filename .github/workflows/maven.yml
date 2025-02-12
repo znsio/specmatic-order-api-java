@@ -54,7 +54,7 @@ jobs:
               --repo-url ${{ github.event.repository.html_url }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: jacoco coverage report
           path: /home/runner/work/specmatic-order-api/specmatic-order-api/target/site/jacoco
