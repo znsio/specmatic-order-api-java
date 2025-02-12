@@ -9,7 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 public class ContractTest implements SpecmaticContractTest {
     private static ConfigurableApplicationContext context;
-
+    private static final String EXCLUDED_ENDPOINTS = "'/internal/metrics'";
     @BeforeAll
     public static void setUp() {
         System.setProperty("host", "localhost");
@@ -17,6 +17,7 @@ public class ContractTest implements SpecmaticContractTest {
         System.setProperty("endpointsAPI", "http://localhost:8090/actuator/mappings");
         System.setProperty("SPECMATIC_GENERATIVE_TESTS", "true");
         System.setProperty("SPECMATIC_TEST_PARALLELISM", "auto");
+        System.setProperty("filter", String.format("PATH!=%s", EXCLUDED_ENDPOINTS));
 
         DB.INSTANCE.resetDB();
 
