@@ -1,20 +1,19 @@
----
 version: 2
 contracts:
   - git:
-      url: "https://github.com/znsio/specmatic-order-contracts.git"
+      url: https://github.com/znsio/specmatic-order-contracts.git
     provides:
-      - "io/specmatic/examples/store/openapi/api_order_v3.yaml"
+      - io/specmatic/examples/store/openapi/api_order_v3.yaml
 report:
   formatters:
-    - type: "text"
-      layout: "table"
+    - type: text
+      layout: table
       lite: false
-      title: "Specmatic Report"
-      logo: "assets/specmatic-logo.svg"
-      logoAltText: "Specmatic"
-      heading: "Contract Test Results"
-      outputDirectory: "./build/reports/specmatic/html"
+      title: Specmatic Report
+      logo: assets/specmatic-logo.svg
+      logoAltText: Specmatic
+      heading: Contract Test Results
+      outputDirectory: ./build/reports/specmatic/html
   types:
     APICoverage:
       OpenAPI:
