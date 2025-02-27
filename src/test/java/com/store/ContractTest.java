@@ -15,7 +15,6 @@ public class ContractTest implements SpecmaticContractTest {
         System.setProperty("host", "localhost");
         System.setProperty("port", "8090");
         System.setProperty("SPECMATIC_GENERATIVE_TESTS", "true");
-        System.setProperty("swaggerUIBaseURL", "http://localhost:8090");
         System.setProperty("SPECMATIC_TEST_PARALLELISM", "auto");
         System.setProperty("filter", String.format("PATH!=%s", EXCLUDED_ENDPOINTS));
 
