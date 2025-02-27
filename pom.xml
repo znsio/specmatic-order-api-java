@@ -197,6 +197,9 @@
             <id>test</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>idea.version</name>
+                </property>
             </activation>
             <dependencies>
                 <dependency>
