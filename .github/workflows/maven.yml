@@ -28,7 +28,7 @@ jobs:
           java-version: ${{ matrix.java }}
 
       - name: Build with Maven
-        run: mvn test package jacoco:report
+        run: mvn test package jacoco:report -Ptest
 
       - name: Run Specmatic Insights Github Build Reporter
         env:
