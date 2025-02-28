@@ -5,15 +5,6 @@ contracts:
     provides:
       - io/specmatic/examples/store/openapi/api_order_v3.yaml
 report:
-  formatters:
-    - type: text
-      layout: table
-      lite: false
-      title: Specmatic Report
-      logo: assets/specmatic-logo.svg
-      logoAltText: Specmatic
-      heading: Contract Test Results
-      outputDirectory: ./build/reports/specmatic/html
   types:
     APICoverage:
       OpenAPI:
