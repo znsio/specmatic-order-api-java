@@ -5,7 +5,11 @@ import jakarta.validation.ValidationException
 
 object DB {
     private var PRODUCTS: MutableMap<Int, Product> =
-        mutableMapOf(10 to Product("XYZ Phone", "gadget", 10, 10), 20 to Product("Gemini", "dog", 10, 20))
+        mutableMapOf(
+            10 to Product("XYZ Phone", "gadget", 10, 10),
+            20 to Product("Gemini", "dog", 10, 20),
+            30 to Product("Cleaner", "gadget", 10, 30)
+        )
     private var PRODUCT_IMAGE: MutableMap<Int, String> =
         mutableMapOf(10 to "https://example.com/image.jpg", 20 to "https://example.com/image.jpg")
     private var ORDERS: MutableMap<Int, Order> =
@@ -17,7 +21,11 @@ object DB {
     }
 
     fun resetDB() {
-        PRODUCTS = mutableMapOf(10 to Product("XYZ Phone", "gadget", 10, 10), 20 to Product("Gemini", "dog", 10, 20))
+        PRODUCTS = mutableMapOf(
+            10 to Product("XYZ Phone", "gadget", 10, 10),
+            20 to Product("Gemini", "dog", 10, 20),
+            30 to Product("Cleaner", "gadget", 10, 30)
+        )
         ORDERS = mutableMapOf(10 to Order(10, 2, OrderStatus.pending, 10), 20 to Order(10, 1, OrderStatus.pending, 20))
     }
 

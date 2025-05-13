@@ -23,6 +23,14 @@ class Orders {
         return ResponseEntity(orderId, HttpStatus.OK)
     }
 
+    @PostMapping("/orders/bulk")
+    fun createBulk(
+       @Valid @RequestBody orders: List<Order>
+    ): ResponseEntity<List<Id>> {
+        val orderIds = orders.map { orderService.createOrder(it) }
+        return ResponseEntity(orderIds, HttpStatus.OK)
+    }
+
     @GetMapping("/orders/{id}")
     fun get(@PathVariable("id") id: Int): Order {
         try {
